@@ -53,6 +53,16 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['fullname'];
     }
+
+    /**
+     * return last food_main
+     */
+    function get_last_food_main_of_date($class_id, $date){
+        $query = $this->db->query("SELECT food_main FROM tbl_time_food WHERE class_id = $class_id AND DATE_FORMAT(create_at, '%Y-%m-%d') = '$date'
+                                    ORDER BY id DESC LIMIT 0, 1");
+        $row = $query->fetchAll();
+        return $row[0]['food_main'];
+    }
 }
 
 ?>

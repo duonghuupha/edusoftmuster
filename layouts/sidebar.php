@@ -17,12 +17,12 @@ $url = $_REQUEST['url']; $url = explode("/", $url);
             </a>
             <b class="arrow"></b>
         </li>
-        <li class="hover">
+        <!--<li class="hover">
             <a href="<?php echo URL.'/muster_early?token='.$_SESSION['data'][0]['token'] ?>">
                 <i class="menu-icon fa fa-child"></i>
                 <span class="menu-text"> Điểm danh đón sớm </span>
             </a>
             <b class="arrow"></b>
-        </li>
+        </li>-->
     </ul>
 </div>

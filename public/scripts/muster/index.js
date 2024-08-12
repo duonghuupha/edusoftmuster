@@ -1,6 +1,5 @@
 var url = '';
 $(function(){
-    let hientai = new Date();
     var gwdth = $('#list_students').width(), fwdth = $('.full').width();
     $('#list_students').jqGrid({
         url: baseUrl + '/muster/json?token='+localStorage.getItem('token'),
@@ -13,21 +12,19 @@ $(function(){
             {label: '&nbsp', name: 'class_id', hidden:true},
             {label: '&nbsp', name: 'muster', hidden:true}
         ],
-        viewrecords: false, height:200, width: gwdth, rowNum: 20, rownumbers: true,
-        height:($('.footer').offset().top - $('#breadcrumbs').offset().top - 161),
-        pager: "#students_pager", caption: "Điểm danh ngày :: "+hientai.getDate()+" - "+(hientai.getMonth() + 1)+" - "+hientai.getFullYear(),
+        viewrecords: false, height:200, width: gwdth, rowNum: 1000, rownumbers: true,
+        height:($('.footer').offset().top - $('#breadcrumbs').offset().top - 133),
+        pager: "#students_pager",
         ondblClickRow: function(rowId){
             var grid = $('#list_students');
             jQuery('#list_students').jqGrid("setSelection", rowId);
             var row = grid.jqGrid("getRowData", rowId);
             add_muster(rowId, row.class_id, row.fullname);
-            //$('#list_students').jqGrid('delRowData', rowId);
         }
     });
     setTimeout(() => {
-        $('#pg_students_pager').css({"display": "none"});
-        $('#students_pager').css({"height": "0px"});
-        $('.HeaderButton ').css({"display": "none"});
+        //$('#pg_students_pager').css({"display": "none"});
+        $('#students_pager').css({"height": "0px", "display": "none"});
     }, 100)
 });
 
@@ -37,6 +34,18 @@ function format_muster(cellvalue, options, rowObject){
     }else{
         return '';
     }
+}
+
+function search(){
+    var value = $('#key_student').val();
+    if(value.length != 0){
+        keyword = value.replaceAll(" ", "$", 'g');
+    }else{
+        keyword = '';
+    }
+    $('#list_students').jqGrid('setGridParam',{
+        postData: {"q": keyword}
+    }).trigger('reloadGrid');
 }
 
 function add_muster(idh, classid, fullname){
