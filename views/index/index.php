@@ -11,10 +11,13 @@
         </div>
         <div class="page-content">
             <div class="row">
-                
+                <div class="col-xs-12 col-sm-12">
+                    <table id="list_students" class="table" role="grid" aria-describedby="dynamic-table_info"></table>
+                    <div id="students_pager"></div>
+                </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
 
-<script src="<?php echo URL.'/public/' ?>scripts/index.js"></script>
+<script src="<?php echo URL.'/public/' ?>scripts/muster/index.js"></script>

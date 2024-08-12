@@ -36,7 +36,23 @@ class Model {
         return $query;
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Check token
+     */
+    function check_token($token){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_users WHERE token = '$token' AND status = 1");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
     
+    /**
+     * return fullname by user_id
+     */
+    function return_fullname_personnel_userid($personel_id){
+        $query = $this->db->query("SELECT fullname FROM tbl_personnel WHERE id = $personel_id");
+        $row = $query->fetchAll();
+        return $row[0]['fullname'];
+    }
 }
 
 ?>
