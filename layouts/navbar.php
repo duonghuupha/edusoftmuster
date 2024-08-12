@@ -54,13 +54,6 @@ if(!isset($_SESSION['data'])){
                     </a>
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
-                            <a href="<?php echo URL.'/profile' ?>">
-                                <i class="ace-icon fa fa-user"></i>
-                                Tài khoản
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
                             <a href="<?php echo URL.'/index/logout' ?>">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Đăng xuất

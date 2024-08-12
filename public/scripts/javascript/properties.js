@@ -14,26 +14,6 @@ $(function(){
     $("input[data_type='currency']").on({ // Format currency onkeypress input
         keyup: function() {formatCurrency($(this));}
     });
-    $('[data-rel=tooltip]').tooltip({container:'body'});
-    $('[data-rel=popover]').popover({container:'body'});
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    /*document.onkeydown = function(e){
-        if((e.ctrlKey && 
-            (e.keyCode === 67 ||
-            e.keyCode === 86 ||
-            e.keyCode === 85 ||
-            e.keyCode === 117)) || 
-            e.keyCode === 123 ||
-            (e.ctrlKey && e.shiftKey && e.keyCode == 73)){
-            console.log('not allowed');
-            return false;
-        }else{
-            return true;
-        }
-    }
-    document.addEventListener("contextmenu", function(e){
-        e.preventDefault();
-    }, false);*/
 });
 
 /**

@@ -95,7 +95,7 @@
 												</a>
 											</div>
 										</div><!-- /.widget-main -->
-										<div class="toolbar clearfix">
+										<div class="toolbar clearfix text-center">
 											<div>
 												<a href="javascript:void(0)" data-target="#forgot-box" class="forgot-password-link">
 													Hệ thống quản lý trường học - EDUSOFT
@@ -105,20 +105,6 @@
 									</div><!-- /.widget-body -->
 								</div><!-- /.login-box -->
 							</div><!-- /.position-relative -->
-							<div class="navbar-fixed-top align-right">
-								<br />
-								&nbsp;
-								<a id="btn-login-dark" href="javascript:void(0)">Tối</a>
-								&nbsp;
-								<span class="blue">/</span>
-								&nbsp;
-								<a id="btn-login-blur" href="javascript:void(0)">Xanh</a>
-								&nbsp;
-								<span class="blue">/</span>
-								&nbsp;
-								<a id="btn-login-light" href="javascript:void(0)">Sáng</a>
-								&nbsp; &nbsp; &nbsp;
-							</div>
 						</div>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -133,33 +119,5 @@
 		<script src="<?php echo URL.'/styles/assets' ?>/js/jquery.maskedinput.min.js"></script>
 		<script src="<?php echo URL.'/styles/assets' ?>/js/ace-elements.min.js"></script>
 		<script src="<?php echo URL.'/styles/assets' ?>/js/ace.min.js"></script>
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-			//you don't need this, just used for changing background
-			jQuery(function($) {
-			 $('#btn-login-dark').on('click', function(e) {
-				$('body').attr('class', 'login-layout');
-				$('#id-text2').attr('class', 'white');
-				$('#id-company-text').attr('class', 'blue');
-				
-				e.preventDefault();
-			 });
-			 $('#btn-login-light').on('click', function(e) {
-				$('body').attr('class', 'login-layout light-login');
-				$('#id-text2').attr('class', 'grey');
-				$('#id-company-text').attr('class', 'blue');
-				
-				e.preventDefault();
-			 });
-			 $('#btn-login-blur').on('click', function(e) {
-				$('body').attr('class', 'login-layout blur-login');
-				$('#id-text2').attr('class', 'white');
-				$('#id-company-text').attr('class', 'light-blue');
-				
-				e.preventDefault();
-			 });
-			 
-			});
-		</script>
 	</body>
 </html>

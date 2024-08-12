@@ -14,8 +14,6 @@ class Controller {
         $this->_Year = (isset($_SESSION['year'])) ? $_SESSION['year'] : [];
         //$this->_Log = new Log();
         $this->_Url = isset($_REQUEST['url']) ? explode("/", $_REQUEST['url']) : ['index'];
-        $this->_Arr_Role = array('other', 'task_result', 'task_result_file', 'index', 'errors', 'task_group', 'task_file', 'validate_proof_dt', 'work_pro_dt', 'dashboard');
-        $this->_Sendmail = new Mail();
 	}
 
 	public function loadModel($name) {
@@ -42,24 +40,6 @@ class Controller {
                     session_destroy();
                     header ('Location: '.URL.'/index/login');
                     exit;
-                }else{
-                    if(isset($_REQUEST['url'])){
-                        $url = $_REQUEST['url'];
-                        $url = explode("/", $url);
-                        if($this->_Info[0]['id'] != 1){ // nguoi dung dang nhap la admin thi khong chay
-                            if(!in_array($url[0], $this->_Arr_Role)){ // neu duong dan thuoc cac duong dan tren thi khong chay
-                                if($this->_Data->check_role_controller($this->_Info[0]['group_role_id'], $url[0]) == 0){
-                                    // neu khong duoc phan quyen thi se bi logout
-                                    session_start();
-                                    session_destroy();
-                                    header ('Location: '.URL.'/index/login');
-                                    exit;
-                                }
-                            }
-                        }
-                    }else{
-                        $url = "index";
-                    }
                 }
             }else{
                 session_start();
