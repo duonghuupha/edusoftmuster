@@ -4,7 +4,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="#">Trang chủ</a>
+                    <a href="<?php echo URL.'/index?token='.$_SESSION['data'][0]['token'] ?>">Trang chủ</a>
                 </li>
                 <li class="active">Điểm danh học sinh :: <?php echo date("d-m-Y") ?></li>
             </ul><!-- /.breadcrumb -->

@@ -4,7 +4,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="#">Trang chủ</a>
+                    <a href="<?php echo URL ?>">Trang chủ</a>
                 </li>
                 <li class="active">Dữ liệu điểm danh</li>
             </ul><!-- /.breadcrumb -->

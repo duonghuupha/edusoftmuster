@@ -26,5 +26,10 @@ class Index_Model extends Model{
         $query = $this->db->query("SELECT * FROM tbl_years WHERE status = 1");
         return $query->fetchAll();
     }
+
+    function get_setting(){
+        $query = $this->db->query("SELECT * FROM tbl_setting WHERE id  = 1");
+        return $query->fetchAll();
+    }
 }
 ?>

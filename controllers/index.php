@@ -26,6 +26,7 @@ class Index extends Controller{
                 Session::set('loggedIn_Edusoft', true);
                 $_SESSION['data'] = $this->model->get_data($username, $password);
                 $_SESSION['year'] = $this->model->get_year_active();
+                $_SESSION['setting'] = $this->model->get_setting();
                 $jsonObj['msg'] = "Đăng nhập thành công";
                 $jsonObj['success'] = true;
                 $jsonObj['token'] = $token;

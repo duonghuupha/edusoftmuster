@@ -24,7 +24,7 @@ class Muster extends Controller{
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function add(){
         $id = $_REQUEST['id']; $classid = $_REQUEST['classid'];
-        if(date("Y-m-d H:i:s") < date("Y-m-d 07:30:00") || date("Y-m-d H:i:s") > date("Y-m-d 08:30:00")){
+        if(date("Y-m-d H:i:s") < date("Y-m-d ".$_SESSION['setting'][0]['time_food_start']) || date("Y-m-d H:i:s") > date("Y-m-d ".$_SESSION['setting'][0]['time_food_end'])){
             $jsonObj['msg'] = "Chưa đến giờ điểm danh hoặc Đã quá giờ điểm danh";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
@@ -50,7 +50,7 @@ class Muster extends Controller{
 
     function del(){
         $id = $_REQUEST['id']; $classid = $_REQUEST['classid'];
-        if(date("Y-m-d H:i:s") < date("Y-m-d 07:30:00") || date("Y-m-d H:i:s") > date("Y-m-d 08:30:00")){
+        if(date("Y-m-d H:i:s") < date("Y-m-d ".$_SESSION['setting'][0]['time_food_start']) || date("Y-m-d H:i:s") > date("Y-m-d ".$_SESSION['setting'][0]['time_food_end'])){
             $jsonObj['msg'] = "Chưa đến giờ điểm danh hoặc Đã quá giờ điểm danh";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
