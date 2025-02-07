@@ -32,7 +32,7 @@ class Muster extends Controller{
             $data = array("code" => time(), "student_id" => $id, "date_muster" => date("Y-m-d"), "class_id" => $classid, "breakfast" => 0);
             $temp = $this->model->addObj($data);
             if($temp){
-                $total_food = $this->model->get_data_time_food($classid);
+                $total_food = $this->model->get_data_time_food($classid, date("Y-m-d"));
                 $data_time_food = array("code" => time(), "class_id" => $classid, "user_id" => $this->_Info[0]['id'], "food_main" => $total_food,
                                         "food_morning" => 0, "create_at" => date("Y-m-d H:i:s"));
                 $this->model->addObj_food($data_time_food);
@@ -57,7 +57,7 @@ class Muster extends Controller{
         }else{
             $temp = $this->model->delObj($id, $classid, date("Y-m-d"));
             if($temp){
-                $total_food = $this->model->get_data_time_food($classid);
+                $total_food = $this->model->get_data_time_food($classid, date("Y-m-d"));
                 $data_time_food = array("code" => time(), "class_id" => $classid, "user_id" => $this->_Info[0]['id'], "food_main" => $total_food,
                                         "food_morning" => 0, "create_at" => date("Y-m-d H:i:s"));
                 $this->model->addObj_food($data_time_food);
