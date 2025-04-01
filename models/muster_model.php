@@ -42,8 +42,8 @@ class Muster_Model extends Model{
         return $query;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    function get_data_time_food($classid){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student_muster WHERE class_id = $classid");
+    function get_data_time_food($classid, $date){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student_muster WHERE class_id = $classid AND date_muster = '$date'");
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
