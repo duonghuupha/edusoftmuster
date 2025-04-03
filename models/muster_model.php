@@ -32,6 +32,12 @@ class Muster_Model extends Model{
         }
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function dupliObj($studentid, $classid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student_muster WHERE student_id = $studentid AND class_id = $classid AND date_muster = '".date("Y-m-d")."'");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
     function addObj($data){
         $query = $this->insert("tbl_student_muster", $data);
         return $query;
