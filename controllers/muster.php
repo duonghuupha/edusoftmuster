@@ -23,26 +23,33 @@ class Muster extends Controller{
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     function add(){
-        $id = $_REQUEST['id']; $classid = $_REQUEST['classid'];
+        $id = $_REQUEST['id']; $classid = $_REQUEST['classid']; $code = time();
         if(date("Y-m-d H:i:s") < date("Y-m-d ".$_SESSION['setting'][0]['time_food_start']) || date("Y-m-d H:i:s") > date("Y-m-d ".$_SESSION['setting'][0]['time_food_end'])){
             $jsonObj['msg'] = "Chưa đến giờ điểm danh hoặc Đã quá giờ điểm danh";
             $jsonObj['success'] = false;
             $this->view->jsonObj = json_encode($jsonObj);
         }else{
-            $data = array("code" => time(), "student_id" => $id, "date_muster" => date("Y-m-d"), "class_id" => $classid, "breakfast" => 0);
-            $temp = $this->model->addObj($data);
-            if($temp){
-                $total_food = $this->model->get_data_time_food($classid, date("Y-m-d"));
-                $data_time_food = array("code" => time(), "class_id" => $classid, "user_id" => $this->_Info[0]['id'], "food_main" => $total_food,
-                                        "food_morning" => 0, "create_at" => date("Y-m-d H:i:s"));
-                $this->model->addObj_food($data_time_food);
-                $jsonObj['msg'] = "Điểm danh thành công";
-                $jsonObj['success'] = true;
-                $this->view->jsonObj = json_encode($jsonObj);
-            }else{
-                $jsonObj['msg'] = "Điểm danh không thành công";
+            if($this->model->dupliObj($id, $classid) > 0){
+                $jsonObj['msg'] = "Học sinh đã tồn tại dữ liệu điểm danh, không thể điểm danh lại";
                 $jsonObj['success'] = false;
                 $this->view->jsonObj = json_encode($jsonObj);
+            }else{
+                $data = array("code" => time(), "student_id" => $id, "date_muster" => date("Y-m-d"), "class_id" => $classid, "breakfast" => 0,
+                                "user_id" => $this->_Info[0]['id'], "create_at" => date("Y-m-d H:i:s"));
+                $temp = $this->model->addObj($data);
+                if($temp){
+                    $total_food = $this->model->get_data_time_food($classid, date("Y-m-d"));
+                    $data_time_food = array("code" => time(), "class_id" => $classid, "user_id" => $this->_Info[0]['id'], "food_main" => $total_food,
+                                            "food_morning" => 0, "create_at" => date("Y-m-d H:i:s"));
+                    $this->model->addObj_food($data_time_food);
+                    $jsonObj['msg'] = "Điểm danh thành công";
+                    $jsonObj['success'] = true;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }else{
+                    $jsonObj['msg'] = "Điểm danh không thành công";
+                    $jsonObj['success'] = false;
+                    $this->view->jsonObj = json_encode($jsonObj);
+                }
             }
         }
         $this->view->render("muster/add");

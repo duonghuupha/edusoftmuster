@@ -7,14 +7,14 @@ class Muster_Model extends Model{
     function getFetObj($q, $yearid, $class_id, $date, $offset, $rows){
         $result = array();
         $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student_class WHERE year_id = $yearid AND class_id = $class_id AND
-                                    student_code IN (SELECT tbl_student.code FROM tbl_student WHERE tbl_student.fullname LIKE '%$q%')");
+                                    student_code IN (SELECT tbl_student.code FROM tbl_student WHERE status = 1 AND tbl_student.fullname LIKE '%$q%')");
         $row = $query->fetchAll();
         $query = $this->db->query("SELECT class_id, (SELECT fullname FROM tbl_student WHERE tbl_student.code = student_code) AS fullname, 
                                     (SELECT tbl_student.id FROM tbl_student WHERE tbl_student.code = student_code) AS id,
                                     (SELECT COUNT(*) AS Total FROM tbl_student_muster WHERE class_id = $class_id AND date_muster = '$date'
                                     AND student_id = (SELECT tbl_student.id FROM tbl_student WHERE tbl_student.code = student_code)) AS muster 
                                     FROM tbl_student_class WHERE year_id = $yearid AND class_id = $class_id AND student_code IN (SELECT tbl_student.code 
-                                    FROM tbl_student WHERE tbl_student.fullname LIKE '%$q%') ORDER BY (SELECT fullname FROM tbl_student 
+                                    FROM tbl_student WHERE status = 1 AND tbl_student.fullname LIKE '%$q%') ORDER BY (SELECT fullname FROM tbl_student 
                                     WHERE tbl_student.code = student_code) ASC LIMIT $offset, $rows");
         $result['records'] = $row[0]['Total'];
         $result['total'] = ceil($row[0]['Total']/$rows);
@@ -32,6 +32,12 @@ class Muster_Model extends Model{
         }
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function dupliObj($studentid, $classid){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_student_muster WHERE student_id = $studentid AND class_id = $classid AND date_muster = '".date("Y-m-d")."'");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
+
     function addObj($data){
         $query = $this->insert("tbl_student_muster", $data);
         return $query;
