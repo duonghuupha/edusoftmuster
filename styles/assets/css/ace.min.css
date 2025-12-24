@@ -21129,3 +21129,31 @@ input.typeahead.scrollable~.tt-menu {
     background-color: #438EB9;
     color: white;
 }
+
+.css_imp_food{
+    border-collapse: collapse;
+}
+
+.css_imp_food td{
+    border: 1px solid #ddd;
+    padding:8px;
+    vertical-align: middle !important;
+}
+
+.css_imp_food tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.css_imp_food .td .text-center{
+    text-align: center;
+}
+
+.css_imp_food td span{
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+.css_imp_food input{
+    transform: scale(1.5);
+}
