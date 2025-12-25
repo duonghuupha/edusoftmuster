@@ -5,16 +5,27 @@ class Model {
 	}
 
     // them moi du lieu
-    function insert($table, $array){
-        $cols = array();
-        $bind = array();
-        foreach($array as $key => $value){
-            $cols[] = $key;
-            $bind[] = "'".$value."'";
+    function insert($table, $data) {
+        $fields = array_keys($data);
+        $params = array_map(fn($f) => ':' . $f, $fields);
+
+        $sql = "INSERT INTO {$table}
+                (" . implode(',', $fields) . ")
+                VALUES (" . implode(',', $params) . ")";
+
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($data as $key => $value) {
+            if (is_resource($value) || is_string($value) && strlen($value) > 1000) {
+                $stmt->bindValue(':' . $key, $value, PDO::PARAM_LOB);
+            } else {
+                $stmt->bindValue(':' . $key, $value);
+            }
         }
-        $query = $this->db->query("INSERT INTO ".$table." (".implode(",", $cols).") VALUES (".implode(",", $bind).")");
-        return $query;
+
+        return $stmt->execute();
     }
+
 
     // cap nhat du lieu
     function update($table, $array, $where){
@@ -62,6 +73,16 @@ class Model {
                                     ORDER BY id DESC LIMIT 0, 1");
         $row = $query->fetchAll();
         return $row[0]['food_main'];
+    }
+
+    /**
+     * return value share food
+     */
+    function get_value_share_food($food_id, $system_id, $type_food){
+        $query = $this->db->query("SELECT value_share FROM tbldm_food_ct WHERE food_code = (SELECT tbldm_food.code FROM tbldm_food WHERE tbldm_food.id = $food_id
+                                    AND tbldm_food.type_id = $type_food) AND system_id = $system_id");
+        $row = $query->fetchAll();
+        return $row[0]['value_share'];
     }
 }
 

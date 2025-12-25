@@ -1,3 +1,6 @@
+<?php
+$array_type_food = array("Cơm", "Món mặn", "Món xào", "Canh", "Tráng miệng"); $tong = 0;
+?>
 <div class="main-content">
     <div class="main-content-inner">
         <div class="breadcrumbs ace-save-state breadcrumbs-fixed" id="breadcrumbs">
@@ -12,25 +15,31 @@
         <div class="page-content">
             <div class="row">
                 <form id="fm" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="type_food" id="type_food" value=""/>
+                    <input type="hidden" name="single" id="single" value=""/>
+                    <input type="hidden" name="data_food" id="data_food" value=""/>
                     <table class="table css_imp_food" role="grid" aria-describedby="dynamic-table_info">
                         <tr>
                             <td class="text-center"><b>Tổng số học sinh</b></td>
-                            <td class="text-center"><b>33</b></td>
+                            <td class="text-center"><b><?php echo $this->total_student ?></b></td>
                             <td></td>
                         </tr>
                         <?php
-                        for($i = 1; $i <= 5; $i++){
+                        foreach($this->json_food as $key => $value){
+                            $value_share = $this->_Data->get_value_share_food($value['food_id'], $this->system_id, $value['type_food']);
+                            $giatri = round($this->total_student*$value_share, 1);
                         ?>
                         <tr>
                             <td>
-                                <span>Cơm</span>
-                                <span><b>Cơm gạo Bắc hương</b></span>
+                                <span><?php echo $array_type_food[$value['type_food']-1] ?></span>
+                                <span><b><?php echo $value['title_food'] ?></b></span>
                             </td>
                             <td class="text-center">
-                                <span><b>7</b><sub>kg</sub></span>
+                                <span><b><?php echo $giatri ?></b><sub><?php echo $value['unit_title'] ?></sub></span>
                             </td>
                             <td class="text-center">
-                                <input name="form-field-checkbox" type="checkbox"/>
+                                <input name="value_<?php echo $value['food_id'] ?>" type="checkbox" id="value_<?php echo $value['food_id'] ?>"
+                                onclick="change_data_accept(<?php echo $value['food_id'] ?>)" value="<?php echo $giatri ?>"/>
                             </td>
                         </tr>
                         <?php
@@ -43,7 +52,7 @@
                             <i class="ace-icon fa fa-pencil bigger-110"></i>
                             Ký lại
                         </button>
-                        <button type="button" class="btn btn-sm btn-success" id="btn_save_import_food_class">
+                        <button type="button" class="btn btn-sm btn-success" id="btn_save_import_food_class"onclick="save()">
                             <i class="ace-icon fa fa-save bigger-110"></i>
                             Lưu thông tin
                         </button>

@@ -183,6 +183,43 @@ class Convert{
         return $result;
     }
 
+    function return_day_number_text($text){
+        if($text == 'Mon'){
+            $string = 2;
+        }elseif($text == 'Tue'){
+            $string = 3;
+        }elseif($text == 'Wed'){
+            $string = 4;
+        }elseif($text == 'Thu'){
+            $string = 5;
+        }elseif($text == 'Fri'){
+            $string = 6;
+        }elseif($text == 'Sat'){
+            $string = 7;
+        }
+        return $string;
+    }
+
+    function weekOfMonth($date) {
+        // estract date parts
+        list($y, $m, $d) = explode('-', date('Y-m-d', strtotime($date)));
+        
+        // current week, min 1
+        $w = 1;
+        
+        // for each day since the start of the month
+        for ($i = 1; $i < $d; ++$i) {
+            // if that day was a sunday and is not the first day of month
+            if ($i > 1 && date('w', strtotime("$y-$m-$i")) == 0) {
+                // increment current week
+                ++$w;
+            }
+        }
+        
+        // now return
+        return $w;
+    }
+
     function return_day_text($text){
         if($text == 'Mon'){
             $string = 'Thứ hai';
