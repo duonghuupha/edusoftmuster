@@ -20,7 +20,7 @@ class Import_food_class_Model extends Model{
 
     // thuc don hien tai chinh
     function get_menu_food_ct_current_date($date_menu, $week_odd_even){
-        $query = $this->db->query("SELECT food_id, (SELECT type_id FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS type_food, 
+        $query = $this->db->query("SELECT food_id, (SELECT type_id FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS type_food, 1 AS type_menu,
                                     (SELECT tbldm_food.title FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS title_food, 
                                     (SELECT tbldm_unit.title FROM tbldm_unit WHERE tbldm_unit.id = (SELECT tbldm_food.unit_id FROM tbldm_food WHERE tbldm_food.id = food_id 
                                     AND tbldm_food.status = 1)) AS unit_title FROM tbl_menu_food_detail WHERE menu_code_ct = (SELECT tbl_menu_food_ct.code FROM tbl_menu_food_ct 
@@ -31,7 +31,7 @@ class Import_food_class_Model extends Model{
 
     // thuc don hien tai phu mau giao
     function get_menu_food_ct_current_date_sub_mg($date_menu, $week_odd_even){
-        $query = $this->db->query("SELECT food_id, (SELECT type_id FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS type_food, 
+        $query = $this->db->query("SELECT food_id, (SELECT type_id FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS type_food, 4 AS type_menu,
                                     (SELECT tbldm_food.title FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS title_food, 
                                     (SELECT tbldm_unit.title FROM tbldm_unit WHERE tbldm_unit.id = (SELECT tbldm_food.unit_id FROM tbldm_food WHERE tbldm_food.id = food_id 
                                     AND tbldm_food.status = 1)) AS unit_title FROM tbl_menu_food_detail WHERE menu_code_ct = (SELECT tbl_menu_food_ct.code FROM tbl_menu_food_ct 
@@ -45,7 +45,8 @@ class Import_food_class_Model extends Model{
         $query = $this->db->query("SELECT food_id, (SELECT type_id FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS type_food,
                                     (SELECT tbldm_food.title FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) AS title_food,
                                     (SELECT tbldm_unit.title FROM tbldm_unit WHERE tbldm_unit.id = (SELECT tbldm_food.unit_id FROM tbldm_food WHERE tbldm_food.id = food_id 
-                                    AND tbldm_food.status = 1)) AS unit_title FROM tbl_menu_food_detail WHERE menu_code_ct IN (SELECT tbl_menu_food_ct.code FROM tbl_menu_food_ct 
+                                    AND tbldm_food.status = 1)) AS unit_title, (SELECT type_menu FROM tbl_menu_food_ct WHERE tbl_menu_food_ct.code = menu_code_ct) AS type_menu
+                                    FROM tbl_menu_food_detail WHERE menu_code_ct IN (SELECT tbl_menu_food_ct.code FROM tbl_menu_food_ct 
                                     WHERE date_menu = $date_menu AND (type_menu = 2 OR type_menu = 3) AND tbl_menu_food_ct.menu_id = (SELECT tbl_menu_food.id FROM tbl_menu_food 
                                     WHERE week_odd_even = $week_odd_even AND status = 1 ORDER BY date_start DESC LIMIT 0, 1)) 
                                     ORDER BY (SELECT type_id FROM tbldm_food WHERE tbldm_food.id = food_id AND tbldm_food.status = 1) ASC");

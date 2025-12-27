@@ -35,16 +35,18 @@ class Import_food_class extends Controller{
 
     function add(){
         $single = $_REQUEST['single']; $single = preg_replace('#^data:image/\w+;base64,#i', '', $single); $binary = base64_decode($single);
-        $filename = 'signature_'.time().'_'.rand(100, 999).'.png'; $type_menu = $_REQUEST['type_food'];
+        $filename = 'signature_'.time().'_'.rand(100, 999).'.png'; $type_menu = $_REQUEST['type_food']; $total_student = $_REQUEST['total_student'];
         $data_food = json_decode($_REQUEST['data_food'], true); $code = time();
         $info_class = $this->model->get_class_id_pass_yearid_an_userid($this->_Year[0]['id'], $this->_Info[0]['id']);
         if($this->model->dupliObj($info_class[0]['id'], $type_menu, date('Y-m-d')) == 0){
             $data = array('code' => $code, 'class_id' => $info_class[0]['id'], 'user_id' => $this->_Info[0]['id'], 'create_at' => date('Y-m-d H:i:s'),
-                            'type_menu' => $type_menu, 'img_single' => $filename);
+                            'type_menu' => $type_menu, 'img_single' => $filename, 'student_total' => $total_student);
             $temp = $this->model->addObj($data);
             if($temp){
                 foreach($data_food as $row){
-                    $data_detail = array('code' => time(), 'code_imp_food' => $code, 'food_id' => $row['food_id'], 'status' => $row['status'], 'value' => $row['value']);
+                    $giatri = explode('$', $row['value']);
+                    $data_detail = array('code' => time(), 'code_imp_food' => $code, 'food_id' => $row['food_id'], 'status' => $row['status'], 'value' => $giatri[0],
+                                        'type_menu' => $giatri[1]);
                     $this->model->addObj_detail($data_detail);
                 }
                 $dir = DIR_SIGNATURE.'/'.date('Y-m');

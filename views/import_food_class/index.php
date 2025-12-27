@@ -19,6 +19,7 @@ $disabled = (count($this->_Data->get_data_food_imp($this->class_id, $this->type_
                     <input type="hidden" name="type_food" id="type_food" value="<?php echo $this->type_menu ?>"/>
                     <input type="hidden" name="single" id="single" value=""/>
                     <input type="hidden" name="data_food" id="data_food" value=""/>
+                    <input type="hidden" name="total_student" id="total_student" value="<?php echo $this->total_student ?>"/>
                     <table class="table css_imp_food" role="grid" aria-describedby="dynamic-table_info">
                         <tr>
                             <td class="text-center"><b>Tổng số học sinh</b></td>
@@ -41,7 +42,7 @@ $disabled = (count($this->_Data->get_data_food_imp($this->class_id, $this->type_
                             </td>
                             <td class="text-center">
                                 <input name="value_<?php echo $value['food_id'] ?>" type="checkbox" id="value_<?php echo $value['food_id'] ?>"
-                                onclick="change_data_accept(<?php echo $value['food_id'] ?>)" value="<?php echo $giatri ?>" <?php echo $checked.' '.$disabled ?>/>
+                                onclick="change_data_accept(<?php echo $value['food_id'] ?>)" value="<?php echo $giatri.'$'.$value['type_menu'] ?>" <?php echo $checked.' '.$disabled ?>/>
                             </td>
                         </tr>
                         <?php
