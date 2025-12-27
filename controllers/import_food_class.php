@@ -23,23 +23,22 @@ class Import_food_class extends Controller{
     }
 
     function add(){
-        $single = $_REQUEST['single']; $single = str_replace('data:image/png;base64,', '', $single); $binary = base64_decode($single, true);
+        $single = $_REQUEST['single']; $single = preg_replace('#^data:image/\w+;base64,#i', '', $single); $binary = base64_decode($single);
+        $filename = 'signature_'.time().'_'.rand(100, 999).'.png';
         $data_food = json_decode($_REQUEST['data_food'], true); $code = time();
         $info_class = $this->model->get_class_id_pass_yearid_an_userid($this->_Year[0]['id'], $this->_Info[0]['id']);
-<<<<<<< HEAD
-        if($this->model->dupliObj($info_class[0]['id'], 1, date('2025-12-22')) == 0){
-            $data = array('code' => $code, 'class_id' => $info_class[0]['id'], 'user_id' => $this->_Info[0]['id'], 'create_at' => date('2025-12-22 H:i:s'),
-=======
         if($this->model->dupliObj($info_class[0]['id'], 1, date('Y-m-d')) == 0){
             $data = array('code' => $code, 'class_id' => $info_class[0]['id'], 'user_id' => $this->_Info[0]['id'], 'create_at' => date('Y-m-d H:i:s'),
->>>>>>> 3c39575459ef3e82d91721a7f8a5c9a3a020afa5
-                            'type_menu' => 1, 'img_single' => $binary);
+                            'type_menu' => 1, 'img_single' => $filename);
             $temp = $this->model->addObj($data);
             if($temp){
                 foreach($data_food as $row){
                     $data_detail = array('code' => time(), 'code_imp_food' => $code, 'food_id' => $row['food_id'], 'status' => $row['status'], 'value' => $row['value']);
                     $this->model->addObj_detail($data_detail);
                 }
+                $dir = DIR_SIGNATURE.'/'.date('Y-m');
+                if(!is_dir($dir)){ mkdir($dir, 0777, true); }
+                file_put_contents($dir.'/'.$filename, $binary);
                 $jsonObj['msg'] = "Giao nhận KPHS thành công!";
                 $jsonObj['success'] = true;
                 $this->view->jsonObj = json_encode($jsonObj);
@@ -50,10 +49,6 @@ class Import_food_class extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("import_food_class/add");
-    }
-
-    function signture(){
-        
     }
 }
 ?>

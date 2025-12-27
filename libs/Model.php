@@ -99,10 +99,9 @@ class Model {
      * return eexit data food import
      */
     function get_data_food_imp($class_id, $type_menu, $date){
-        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_imp_food_class WHERE class_id = $class_id AND type_menu = $type_menu
+        $query = $this->db->query("SELECT img_single FROM tbl_imp_food_class WHERE class_id = $class_id AND type_menu = $type_menu
                                     AND DATE_FORMAT(create_at, '%Y-%m-%d') = '$date'");
-        $row = $query->fetchAll();
-        return $row[0]['Total'];
+        return $query->fetchAll();
     }
 }
 

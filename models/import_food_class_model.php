@@ -54,5 +54,11 @@ class Import_food_class_Model extends Model{
         $row = $query->fetchAll();
         return $row[0]['Total'];
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_signture_food_class($class_id, $type_menu, $date){
+        $query = $this->db->query("SELECT img_single, mime_type FROM tbl_imp_food_class WHERE class_id = $class_id AND type_menu = $type_menu 
+                                    AND DATE_FORMAT(create_at, '%Y-%m-%d') = '$date' ORDER BY id DESC LIMIT 0, 1");
+        return $row = $query->fetchAll();
+    }
 }
 ?>

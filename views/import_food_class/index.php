@@ -1,7 +1,6 @@
 <?php
 $array_type_food = array("Cơm", "Món mặn", "Món xào", "Canh", "Tráng miệng"); $tong = 0;
-$disabled = ($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d')) > 0) ? "disabled" : "";
-$canvas = ($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d')) > 0) ? 'signaturePad_disabled' : "signaturePad";
+$disabled = (count($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d'))) > 0) ? "disabled" : "";
 ?>
 <div class="main-content">
     <div class="main-content-inner">
@@ -50,7 +49,20 @@ $canvas = ($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d')) > 
                         ?>
                     </table>
                     <div class="col-xs-12 text-center">
-                        <canvas id="<?php echo $canvas ?>" style="border:1px solid #ccc; touch-action:none; width:100%"></canvas>
+                        <?php
+                        if(count($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d'))) > 0){
+                            echo '
+                            <div class="signature-box" style="border:1px solid #ccc; width:100%; height: 200px; text-align:center; margin-bottom:10px;">
+                                <img
+                                    src="'.URL_SIGNATURE.'/'.date('Y-m').'/'.$this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d'))[0]['img_single'].'"
+                                    alt="Chữ ký"
+                                    style="max-width:50%;"
+                                >
+                            </div>';
+                        }else{
+                            echo '<canvas id="signaturePad" style="border:1px solid #ccc; touch-action:none; width:100%"></canvas>';
+                        }
+                        ?>
                         <button type="button" class="btn btn-sm btn-danger" id="btn_save_import_food_class" onclick="clear_single()" <?php echo $disabled ?>>
                             <i class="ace-icon fa fa-pencil bigger-110"></i>
                             Ký lại

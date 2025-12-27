@@ -21157,3 +21157,20 @@ input.typeahead.scrollable~.tt-menu {
 .css_imp_food input{
     transform: scale(1.5);
 }
+
+.signature-box {
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center; /* căn giữa ngang */
+    align-items: center;     /* căn giữa dọc */
+
+    box-sizing: border-box;
+}
+
+.signature-box img {
+    max-width: 70%;
+    max-height: 80%;
+    object-fit: contain;
+}
