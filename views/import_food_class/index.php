@@ -1,6 +1,6 @@
 <?php
 $array_type_food = array("Cơm", "Món mặn", "Món xào", "Canh", "Tráng miệng"); $tong = 0;
-$disabled = (count($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d'))) > 0) ? "disabled" : "";
+$disabled = (count($this->_Data->get_data_food_imp($this->class_id, $this->type_menu, date('Y-m-d'))) > 0) ? "disabled" : "";
 ?>
 <div class="main-content">
     <div class="main-content-inner">
@@ -16,7 +16,7 @@ $disabled = (count($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m
         <div class="page-content">
             <div class="row">
                 <form id="fm" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="type_food" id="type_food" value=""/>
+                    <input type="hidden" name="type_food" id="type_food" value="<?php echo $this->type_menu ?>"/>
                     <input type="hidden" name="single" id="single" value=""/>
                     <input type="hidden" name="data_food" id="data_food" value=""/>
                     <table class="table css_imp_food" role="grid" aria-describedby="dynamic-table_info">
@@ -29,11 +29,11 @@ $disabled = (count($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m
                         foreach($this->json_food as $key => $value){
                             $value_share = $this->_Data->get_value_share_food($value['food_id'], $this->system_id, $value['type_food']);
                             $giatri = round($this->total_student*$value_share, 1);
-                            $checked = ($this->_Data->get_data_food_imp_detail($this->class_id, 1, date('Y-m-d'), $value['food_id'])[0]['status'] == 1) ? "checked" : "";
+                            $checked = ($this->_Data->get_data_food_imp_detail($this->class_id, $this->type_menu, date('Y-m-d'), $value['food_id'])[0]['status'] == 1) ? "checked" : "";
                         ?>
                         <tr>
                             <td>
-                                <span><?php echo $array_type_food[$value['type_food']-1] ?></span>
+                                <span><?php echo $array_type_food[$value['type_food']-1].'('.$value['type_food'].')' ?></span>
                                 <span><b><?php echo $value['title_food'] ?></b></span>
                             </td>
                             <td class="text-center">
@@ -50,11 +50,11 @@ $disabled = (count($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m
                     </table>
                     <div class="col-xs-12 text-center">
                         <?php
-                        if(count($this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d'))) > 0){
+                        if(count($this->_Data->get_data_food_imp($this->class_id, $this->type_menu, date('Y-m-d'))) > 0){
                             echo '
                             <div class="signature-box" style="border:1px solid #ccc; width:100%; height: 200px; text-align:center; margin-bottom:10px;">
                                 <img
-                                    src="'.URL_SIGNATURE.'/'.date('Y-m').'/'.$this->_Data->get_data_food_imp($this->class_id, 1, date('Y-m-d'))[0]['img_single'].'"
+                                    src="'.URL_SIGNATURE.'/'.date('Y-m').'/'.$this->_Data->get_data_food_imp($this->class_id, $this->type_menu, date('Y-m-d'))[0]['img_single'].'"
                                     alt="Chữ ký"
                                     style="max-width:50%;"
                                 >
