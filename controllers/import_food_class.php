@@ -26,7 +26,7 @@ class Import_food_class extends Controller{
         $data_food = json_decode($_REQUEST['data_food'], true); $code = time();
         $info_class = $this->model->get_class_id_pass_yearid_an_userid($this->_Year[0]['id'], $this->_Info[0]['id']);
         if($this->model->dupliObj($info_class[0]['id'], 1, date('2025-12-22')) == 0){
-            $data = array('code' => $code, 'class_id' => $info_class[0]['id'], 'user_id' => $this->_Info[0]['id'], 'create_at' => date('Y-m-d H:i:s'),
+            $data = array('code' => $code, 'class_id' => $info_class[0]['id'], 'user_id' => $this->_Info[0]['id'], 'create_at' => date('2025-12-22 H:i:s'),
                             'type_menu' => 1, 'img_single' => $binary);
             $temp = $this->model->addObj($data);
             if($temp){

@@ -29,6 +29,15 @@ class Import_food_class_Model extends Model{
         return $query->fetchAll();
     }
 
+    // tra ve type_menu cua thuc don
+    function get_type_menu_foof($date_menu, $week_odd_even){
+        $query = $this->db->query("SELECT type_menu FROM tbl_menu_food_ct WHERE date_menu = $date_menu AND type_menu = 1 AND menu_id = (SELECT tbl_menu_food.id FROM tbl_menu_food 
+                                    WHERE tbl_menu_food.week_odd_even = $week_odd_even ORDER BY date_start DESC LIMIT 0, 1)");
+        $row = $query->fetchAll();
+        return $row[0]['type_menu'];
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     function addObj($data){
         $query = $this->insert("tbl_imp_food_class", $data);
         return $query;
