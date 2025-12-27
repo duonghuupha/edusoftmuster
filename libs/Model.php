@@ -84,6 +84,26 @@ class Model {
         $row = $query->fetchAll();
         return $row[0]['value_share'];
     }
+
+    /**
+     * return exit data food import detail
+     */
+    function get_data_food_imp_detail($class_id, $type_menu, $date, $food_id){
+        $query = $this->db->query("SELECT status FROM tbl_imp_food_class_detail WHERE code_imp_food = (SELECT tbl_imp_food_class.code FROM tbl_imp_food_class
+                                    WHERE tbl_imp_food_class.class_id = $class_id AND tbl_imp_food_class.type_menu = $type_menu
+                                    AND DATE_FORMAT(tbl_imp_food_class.create_at, '%Y-%m-%d') = '$date') AND food_id = $food_id");
+        return $query->fetchAll();
+    }
+
+    /**
+     * return eexit data food import
+     */
+    function get_data_food_imp($class_id, $type_menu, $date){
+        $query = $this->db->query("SELECT COUNT(*) AS Total FROM tbl_imp_food_class WHERE class_id = $class_id AND type_menu = $type_menu
+                                    AND DATE_FORMAT(create_at, '%Y-%m-%d') = '$date'");
+        $row = $query->fetchAll();
+        return $row[0]['Total'];
+    }
 }
 
 ?>

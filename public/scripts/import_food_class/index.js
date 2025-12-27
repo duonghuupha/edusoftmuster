@@ -45,7 +45,24 @@ function save() {
     if(data_accept.length != 0 && cropped && isAllValueChecked()){
         const dataURL = cropped.toDataURL('image/png');
         $('#single').val(dataURL); $('#data_food').val(JSON.stringify(data_accept));
-        save_reject('#fm', baseUrl + '/import_food_class/add?token='+localStorage.getItem('token'), baseUrl + '/import_food_class?token=' + localStorage.getItem('token'));
+        bootbox.confirm({
+            message: "Bạn có chắc chắn muốn duyệt các món ăn đã chọn?",
+            buttons:{
+                confirm: {
+                    label: "Đồng ý",
+                    className: "btn-primary btn-sm"
+                },
+                cancel: {
+                    label: "Không đồng ý",
+                    className: "btn-danger btn-sm"
+                }
+            },
+            callback: function(result){
+                if(result){
+                    save_reject('#fm', baseUrl + '/import_food_class/add?token='+localStorage.getItem('token'), baseUrl + '/import_food_class?token=' + localStorage.getItem('token'));
+                }
+            }
+        });
     }else{
         show_message('error', 'Vui lòng xác nhận định lượng món ăn và ký tên!');
     }
