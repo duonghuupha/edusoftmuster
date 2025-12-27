@@ -9,10 +9,11 @@ class Import_food_class extends Controller{
         require('layouts/header.php');
 
         $info_class = $this->model->get_class_id_pass_yearid_an_userid($this->_Year[0]['id'], $this->_Info[0]['id']);
-        $total_student = $this->model->get_total_student_muster($info_class[0]['id'], date('2025-12-22'));
+        $total_student = $this->model->get_total_student_muster($info_class[0]['id'], date('Y-m-d'));
         $this->view->total_student = $total_student; $this->view->system_id = $info_class[0]['training_system_id'];
+        $this->view->class_id = $info_class[0]['id'];
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $number_day = $this->_Convert->return_day_number_text(date("D")); $week_of_month = $this->_Convert->weekOfMonth(date("2025-12-22"));
+        $number_day = $this->_Convert->return_day_number_text(date("D")); $week_of_month = $this->_Convert->weekOfMonth(date("Y-m-d"));
         $week_odd_even = ($week_of_month % 2 == 0) ? 1 : 2; 
         $json_food = $this->model->get_menu_food_ct_current_date($number_day, $week_odd_even);
         $this->view->json_food = $json_food;
@@ -25,8 +26,13 @@ class Import_food_class extends Controller{
         $single = $_REQUEST['single']; $single = str_replace('data:image/png;base64,', '', $single); $binary = base64_decode($single, true);
         $data_food = json_decode($_REQUEST['data_food'], true); $code = time();
         $info_class = $this->model->get_class_id_pass_yearid_an_userid($this->_Year[0]['id'], $this->_Info[0]['id']);
+<<<<<<< HEAD
         if($this->model->dupliObj($info_class[0]['id'], 1, date('2025-12-22')) == 0){
             $data = array('code' => $code, 'class_id' => $info_class[0]['id'], 'user_id' => $this->_Info[0]['id'], 'create_at' => date('2025-12-22 H:i:s'),
+=======
+        if($this->model->dupliObj($info_class[0]['id'], 1, date('Y-m-d')) == 0){
+            $data = array('code' => $code, 'class_id' => $info_class[0]['id'], 'user_id' => $this->_Info[0]['id'], 'create_at' => date('Y-m-d H:i:s'),
+>>>>>>> 3c39575459ef3e82d91721a7f8a5c9a3a020afa5
                             'type_menu' => 1, 'img_single' => $binary);
             $temp = $this->model->addObj($data);
             if($temp){
@@ -44,6 +50,10 @@ class Import_food_class extends Controller{
             $this->view->jsonObj = json_encode($jsonObj);
         }
         $this->view->render("import_food_class/add");
+    }
+
+    function signture(){
+        
     }
 }
 ?>
