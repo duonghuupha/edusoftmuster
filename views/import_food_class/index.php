@@ -21,11 +21,15 @@ if(date("H") < 12){ // hien thi thuc don chinh
     $json_food = $json_food_main;
 }else{ // hien thi thuc don chieu
     $type_menu = 2;
+<<<<<<< HEAD
     if($this->type_edu == 2){
         $json_food = $json_food_mg;
     }else{
         $json_food = array_merge($json_food_nt_sub, $json_food_nt_main);
     }
+=======
+    $json_food = array_merge($json_food_nt_sub, $json_food_nt_main);
+>>>>>>> bcff19f904c58bba21f7f2e99f7657f40016374a
 }
 ?>
 <div class="main-content">
