@@ -24,5 +24,18 @@ $url = $_REQUEST['url']; $url = explode("/", $url);
             </a>
             <b class="arrow"></b>
         </li>
+        <?php
+        if($this->_Info[0]['id'] == 1){
+        ?>
+        <li class="hover">
+            <a href="<?php echo URL.'/imp_signature?token='.$_SESSION['data'][0]['token'] ?>">
+                <i class="menu-icon fa fa-pencil"></i>
+                <span class="menu-text"> Cấu hình chữ ký GV</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        <?php
+        }
+        ?>
     </ul>
 </div>

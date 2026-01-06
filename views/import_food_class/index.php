@@ -21,15 +21,11 @@ if(date("H") < 12){ // hien thi thuc don chinh
     $json_food = $json_food_main;
 }else{ // hien thi thuc don chieu
     $type_menu = 2;
-<<<<<<< HEAD
     if($this->type_edu == 2){
         $json_food = $json_food_mg;
     }else{
         $json_food = array_merge($json_food_nt_sub, $json_food_nt_main);
     }
-=======
-    $json_food = array_merge($json_food_nt_sub, $json_food_nt_main);
->>>>>>> bcff19f904c58bba21f7f2e99f7657f40016374a
 }
 ?>
 <div class="main-content">
@@ -90,14 +86,8 @@ if(date("H") < 12){ // hien thi thuc don chinh
                                     style="max-width:50%;"
                                 >
                             </div>';
-                        }else{
-                            echo '<canvas id="signaturePad" style="border:1px solid #ccc; touch-action:none; width:100%"></canvas>';
                         }
                         ?>
-                        <button type="button" class="btn btn-sm btn-danger" id="btn_save_import_food_class" onclick="clear_single()" <?php echo $disabled ?>>
-                            <i class="ace-icon fa fa-pencil bigger-110"></i>
-                            Ký lại
-                        </button>
                         <button type="button" class="btn btn-sm btn-success" id="btn_save_import_food_class"onclick="save()" <?php echo $disabled ?>>
                             <i class="ace-icon fa fa-save bigger-110"></i>
                             Lưu thông tin

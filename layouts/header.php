@@ -29,6 +29,7 @@ if(!isset($_SESSION['data'])){
 		<script src="<?php echo URL ?>/styles/assets/js/ace-extra.min.js"></script>
 		<script>
 			var baseUrl = '<?php echo URL ?>', userid_main = <?php echo $_SESSION['data'][0]['id'] ?>, year_active = <?php echo $_SESSION['year'][0]['id'] ?>;
+			var baseUrl_img = '<?php echo URL_SIGNATURE ?>';
 		</script>
 		<script src="<?php echo URL ?>/public/scripts/javascript/properties.js"></script>
 		<script src="<?php echo URL ?>/public/scripts/javascript/event.js"></script>
