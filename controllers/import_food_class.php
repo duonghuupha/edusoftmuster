@@ -11,24 +11,8 @@ class Import_food_class extends Controller{
         $info_class = $this->model->get_class_id_pass_yearid_an_userid($this->_Year[0]['id'], $this->_Info[0]['id']);
         $total_student = $this->model->get_total_student_muster($info_class[0]['id'], date('Y-m-d'));
         $this->view->total_student = $total_student; $this->view->system_id = $info_class[0]['training_system_id'];
+	$type_edu = $this->model->return_type_edu($info_class[0]['training_system_id']); $this->view->type_edu = $type_edu;
         $this->view->class_id = $info_class[0]['id'];
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $number_day = $this->_Convert->return_day_number_text(date("D")); $week_of_month = $this->_Convert->weekOfMonth(date("Y-m-d"));
-        $week_odd_even = ($week_of_month % 2 == 0) ? 1 : 2; 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if(date("H") < 12){
-            $type_menu = 1; // chinh
-             $json_food = $this->model->get_menu_food_ct_current_date($number_day, $week_odd_even); // chinh
-        }else{
-            $type_menu = 2; // phu
-            // kiem tra nha tre mau giao
-            if($this->model->check_type_edu($info_class[0]['training_system_id']) == 2){
-                $json_food = $this->model->get_menu_food_ct_current_date_sub_mg($number_day, $week_odd_even); // phu mau giao
-            }else{
-                $json_food = $this->model->get_menu_food_ct_current_date_sub_nt($number_day, $week_odd_even); // phu nha tre
-            }
-        }
-        $this->view->type_menu = $type_menu; $this->view->json_food = $json_food;
         $this->view->render('import_food_class/index');
         require('layouts/footer.php');
     }

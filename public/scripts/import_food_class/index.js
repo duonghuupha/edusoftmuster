@@ -90,8 +90,8 @@ function setupCanvas() {
     ctx = canvas.getContext('2d');
     ctx.scale(ratio, ratio);
 
-    ctx.strokeStyle = '#0d6efd'; // xanh
-    ctx.lineWidth = 1.2;         // mảnh hơn
+    ctx.strokeStyle = '#000'; // xanh
+    ctx.lineWidth = 2;         // mảnh hơn
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.imageSmoothingEnabled = true;
