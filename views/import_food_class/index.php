@@ -1,6 +1,5 @@
 <?php
 $array_type_food = array("Cơm", "Món mặn", "Món xào", "Canh", "Tráng miệng");
-$disabled = ($this->_Data->get_data_food_imp($this->class_id, $this->type_menu, date('Y-m-d')) > 0) ? "disabled" : "";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $array_food_current = $this->_Data->get_food_current_date(date("Y-m-d")); $array_food_current = explode(";", $array_food_current);
 $array_food_main = $array_food_current[0]; $array_food_main = explode("$", $array_food_main); $array_food_main = $array_food_main[0];
@@ -27,6 +26,7 @@ if(date("H") < 12){ // hien thi thuc don chinh
         $json_food = array_merge($json_food_nt_sub, $json_food_nt_main);
     }
 }
+$disabled = ($this->_Data->get_data_food_imp($this->class_id, $type_menu, date('Y-m-d')) > 0) ? "disabled" : "";
 ?>
 <div class="main-content">
     <div class="main-content-inner">
@@ -36,7 +36,7 @@ if(date("H") < 12){ // hien thi thuc don chinh
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="<?php echo URL.'/index?token='.$_SESSION['data'][0]['token'] ?>">Trang chủ</a>
                 </li>
-                <li class="active">Giao nhận  KPHS :: <?php echo date("d-m-Y").$title ?></li>
+                <li class="active">Giao nhận  KPHS :: <?php echo date("d-m-Y") ?></li>
             </ul><!-- /.breadcrumb -->
         </div>
         <div class="page-content">
