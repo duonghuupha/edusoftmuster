@@ -1,6 +1,6 @@
 <?php
 $array_type_food = array("Cơm", "Món mặn", "Món xào", "Canh", "Tráng miệng");
-$disabled = (count($this->_Data->get_data_food_imp($this->class_id, $this->type_menu, date('Y-m-d'))) > 0) ? "disabled" : "";
+$disabled = ($this->_Data->get_data_food_imp($this->class_id, $this->type_menu, date('Y-m-d')) > 0) ? "disabled" : "";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $array_food_current = $this->_Data->get_food_current_date(date("Y-m-d")); $array_food_current = explode(";", $array_food_current);
 $array_food_main = $array_food_current[0]; $array_food_main = explode("$", $array_food_main); $array_food_main = $array_food_main[0];
