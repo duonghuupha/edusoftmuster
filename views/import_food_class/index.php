@@ -36,7 +36,7 @@ if(date("H") < 12){ // hien thi thuc don chinh
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="<?php echo URL.'/index?token='.$_SESSION['data'][0]['token'] ?>">Trang chủ</a>
                 </li>
-                <li class="active">Giao nhận  KPHS :: <?php echo date("d-m-Y") ?></li>
+                <li class="active">Giao nhận  KPHS :: <?php echo date("d-m-Y").$title ?></li>
             </ul><!-- /.breadcrumb -->
         </div>
         <div class="page-content">
@@ -76,18 +76,6 @@ if(date("H") < 12){ // hien thi thuc don chinh
                         ?>
                     </table>
                     <div class="col-xs-12 text-center">
-                        <?php
-                        if(count($this->_Data->get_data_food_imp($this->class_id, $type_menu, date('Y-m-d'))) > 0){
-                            echo '
-                            <div class="signature-box" style="border:1px solid #ccc; width:100%; height: 200px; text-align:center; margin-bottom:10px;">
-                                <img
-                                    src="'.URL_SIGNATURE.'/'.date('Y-m').'/'.$this->_Data->get_data_food_imp($this->class_id, $type_menu, date('Y-m-d'))[0]['img_single'].'"
-                                    alt="Chữ ký"
-                                    style="max-width:50%;"
-                                >
-                            </div>';
-                        }
-                        ?>
                         <button type="button" class="btn btn-sm btn-success" id="btn_save_import_food_class"onclick="save()" <?php echo $disabled ?>>
                             <i class="ace-icon fa fa-save bigger-110"></i>
                             Lưu thông tin
