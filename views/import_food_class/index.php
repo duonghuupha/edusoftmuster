@@ -1,6 +1,5 @@
 <?php
 $array_type_food = array("Cơm", "Món mặn", "Món xào", "Canh", "Tráng miệng");
-$disabled = (count($this->_Data->get_data_food_imp($this->class_id, $this->type_menu, date('Y-m-d'))) > 0) ? "disabled" : "";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $array_food_current = $this->_Data->get_food_current_date(date("Y-m-d")); $array_food_current = explode(";", $array_food_current);
 $array_food_main = $array_food_current[0]; $array_food_main = explode("$", $array_food_main); $array_food_main = $array_food_main[0];
@@ -27,6 +26,7 @@ if(date("H") < 12){ // hien thi thuc don chinh
         $json_food = array_merge($json_food_nt_sub, $json_food_nt_main);
     }
 }
+$disabled = ($this->_Data->get_data_food_imp($this->class_id, $type_menu, date('Y-m-d')) > 0) ? "disabled" : "";
 ?>
 <div class="main-content">
     <div class="main-content-inner">
@@ -76,18 +76,6 @@ if(date("H") < 12){ // hien thi thuc don chinh
                         ?>
                     </table>
                     <div class="col-xs-12 text-center">
-                        <?php
-                        if(count($this->_Data->get_data_food_imp($this->class_id, $type_menu, date('Y-m-d'))) > 0){
-                            echo '
-                            <div class="signature-box" style="border:1px solid #ccc; width:100%; height: 200px; text-align:center; margin-bottom:10px;">
-                                <img
-                                    src="'.URL_SIGNATURE.'/'.date('Y-m').'/'.$this->_Data->get_data_food_imp($this->class_id, $type_menu, date('Y-m-d'))[0]['img_single'].'"
-                                    alt="Chữ ký"
-                                    style="max-width:50%;"
-                                >
-                            </div>';
-                        }
-                        ?>
                         <button type="button" class="btn btn-sm btn-success" id="btn_save_import_food_class"onclick="save()" <?php echo $disabled ?>>
                             <i class="ace-icon fa fa-save bigger-110"></i>
                             Lưu thông tin
