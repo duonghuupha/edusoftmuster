@@ -1,7 +1,7 @@
 <?php
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'pho26728_cukhoi');
-define('DB_USER', 'pho26728_cukhoi');
-define('DB_PASS', 'mFyl70@50');
+define('DB_NAME', 'edusoft');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 ?>
