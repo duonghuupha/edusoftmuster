@@ -21,7 +21,7 @@ class Import_food_class extends Controller{
         $type_menu = $_REQUEST['type_food']; $total_student = $_REQUEST['total_student'];
         $data_food = json_decode($_REQUEST['data_food'], true); $code = time();
         $info_class = $this->model->get_class_id_pass_yearid_an_userid($this->_Year[0]['id'], $this->_Info[0]['id']);
-        $now = strtotime(date('H:i')); $start = strtotime('10:30'); $end = strtotime('11:00');
+        $now = strtotime(date('H:i')); $start = strtotime('10:00'); $end = strtotime('11:00');
         $start_sub = strtotime('14:00'); $end_sub = strtotime('15:00');
         if (($now >= $start && $now <= $end) || ($now >= $start_sub && $now <= $end_sub)) {
             if($this->model->dupliObj($info_class[0]['id'], $type_menu, date('Y-m-d')) == 0){

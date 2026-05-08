@@ -50,7 +50,7 @@ function search(){
 
 function add_muster(idh, classid, fullname){
     let today = new Date();
-    if(today.getDay() == 0 || today.getDay() == 6){
+    if(today.getDay() == 0 || today.getDay() == 8){
         show_message("error", "Hôm nay là thứ 7 hoặc chủ nhật, bạn không thể điểm danh");
     }else{
         var grid = $('#list_students');
