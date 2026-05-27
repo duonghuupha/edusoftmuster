@@ -31,5 +31,10 @@ class Index_Model extends Model{
         $query = $this->db->query("SELECT * FROM tbl_setting WHERE id  = 1");
         return $query->fetchAll();
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function get_combo_class($year_id){
+        $query = $this->db->query("SELECT id, title FROM tbl_class WHERE year_id = '$year_id' ORDER BY id ASC");
+        return $query->fetchAll();
+    }
 }
 ?>

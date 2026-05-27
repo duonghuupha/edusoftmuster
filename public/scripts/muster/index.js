@@ -26,6 +26,7 @@ $(function(){
         //$('#pg_students_pager').css({"display": "none"});
         $('#students_pager').css({"height": "0px", "display": "none"});
     }, 100)
+    combo_select_2("class_id", baseUrl + "/index/combo_class", "", 0)
 });
 
 function format_muster(cellvalue, options, rowObject){
