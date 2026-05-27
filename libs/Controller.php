@@ -40,6 +40,17 @@ class Controller {
                     session_destroy();
                     header ('Location: '.URL.'/index/login');
                     exit;
+                }else{
+                    $url = $_REQUEST['url'];
+                    $url = explode("/", $url);
+                    if($url[0] == 'diemdanh'){
+                        if($this->_Info[0]['id'] !=1){
+                            session_start();
+                            session_destroy();
+                            header ('Location: '.URL.'/index/login');
+                            exit;
+                        }
+                    }
                 }
             }else{
                 session_start();
